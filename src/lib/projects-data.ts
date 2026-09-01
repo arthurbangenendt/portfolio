@@ -32,13 +32,16 @@ export const projects: Project[] = [
       "Framer Motion",
       "PostHog",
     ],
+    links: [
+      { label: "GitHub", href: "https://github.com/arthurbangenendt/friohub", external: true },
+      { label: "Live", href: "https://friohub.vercel.app", external: true },
+    ],
     highlights: [
       "Decisões de arquitetura registradas como ADRs",
       "Contratos de banco de dados testados com pgTAP no CI",
       "Runbook de incidentes e SLOs documentados",
       "Política de zero migration manual — todo schema muda via CI",
     ],
-    links: [],
     featured: true,
   },
   {

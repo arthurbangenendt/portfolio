@@ -1,4 +1,6 @@
 import type { Project } from "@/lib/projects-data";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -35,6 +37,22 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
         ))}
       </div>
+
+      {project.links.length > 0 && (
+        <div className="flex flex-wrap gap-3 pt-2">
+          {project.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
