@@ -1,75 +1,41 @@
-export type ProjectRole = "solo" | "collaboration";
+export type ProjectTone = "blue" | "orange";
 
 export interface Project {
   slug: string;
   name: string;
-  tagline: string;
+  eyebrow: string;
   description: string;
-  role: ProjectRole;
-  collaborators?: { name: string; note?: string }[];
+  period: string;
+  role: string;
   stack: string[];
-  highlights?: string[];
+  outcomes: string[];
   links: { label: string; href: string; external?: boolean }[];
-  featured?: boolean;
+  tone: ProjectTone;
 }
 
 export const projects: Project[] = [
   {
     slug: "friohub",
     name: "FrioHub",
-    tagline:
-      "Marketplace de climatização em São Paulo — orçamentos, profissionais e venda de equipamentos em uma plataforma só.",
-    description:
-      "Conecta clientes que precisam de instalação e manutenção de ar-condicionado a profissionais de climatização, com comparação de propostas e venda de equipamentos via dropship de distribuidores. Construído sozinho, do schema do banco à operação em produção.",
-    role: "solo",
-    stack: [
-      "Next.js 16",
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS 4",
-      "Supabase",
-      "OpenAI SDK",
-      "Framer Motion",
-      "PostHog",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/arthurbangenendt/friohub", external: true },
-      { label: "Live", href: "https://friohub.vercel.app", external: true },
-    ],
-    highlights: [
-      "Decisões de arquitetura registradas como ADRs",
-      "Contratos de banco de dados testados com pgTAP no CI",
-      "Runbook de incidentes e SLOs documentados",
-      "Política de zero migration manual — todo schema muda via CI",
-    ],
-    featured: true,
+    eyebrow: "Marketplace HVAC · ambiente de testes",
+    description: "Marketplace em validação que reduz a fricção entre quem precisa de climatização, profissionais e distribuidoras. A experiência cobre descoberta do serviço, recomendação, comparação e acompanhamento em uma única operação.",
+    period: "11 ago — 11 set 2026 · ciclo registrado",
+    role: "Full-stack · produto, arquitetura e entrega",
+    stack: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Postgres", "Tailwind CSS"],
+    outcomes: ["Autenticação, perfis e permissões para clientes, profissionais e distribuidoras", "Matching territorial, agenda, mensagens, financeiro e rastreio de serviços", "299 contratos pgTAP para schema e regras de acesso, além de ADRs e SLOs documentados"],
+    links: [{ label: "Abrir ambiente de testes", href: "https://friohub.vercel.app", external: true }, { label: "Código", href: "https://github.com/arthurbangenendt/friohub", external: true }],
+    tone: "orange",
   },
   {
     slug: "np-vendas",
-    name: "NP Vendas",
-    tagline:
-      "Plataforma de vendas e CRM multi-tenant para uma empresa de HVAC, construída em parceria com Hebert Reis.",
-    description:
-      "Sistema completo de operação comercial: clientes, propostas, pedidos, financeiro, estoque, manutenção com portal público de rastreamento, kanban, automações e um copiloto de IA no WhatsApp. Inclui um gateway MCP/OpenAPI que expõe as próprias APIs do sistema para agentes de IA.",
-    role: "collaboration",
-    collaborators: [{ name: "Hebert Reis" }],
-    stack: [
-      "Next.js 15",
-      "TypeScript",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Zustand",
-      "TanStack Query/Table",
-      "React Hook Form + Zod",
-      "Supabase",
-      "Model Context Protocol SDK",
-      "OpenAI SDK",
-    ],
-    highlights: [
-      "Gateway MCP/OpenAPI expondo as APIs do sistema para agentes de IA",
-      "Copiloto de IA no WhatsApp para o time de vendas",
-      "Portal público de rastreamento de pedidos para clientes finais",
-    ],
+    name: "Coolstack",
+    eyebrow: "CRM multi-tenant · operação comercial HVAC",
+    description: "Sistema operacional para uma operação comercial de climatização: da primeira conversa ao pedido, financeiro, estoque, manutenção e pós-venda. Construído em parceria com Hebert Reis.",
+    period: "15 set 2025 — em evolução",
+    role: "Full-stack · em colaboração com Hebert Reis",
+    stack: ["Next.js 15", "TypeScript", "Supabase", "Zustand", "TanStack", "OpenAI", "MCP"],
+    outcomes: ["CRM, propostas, pedidos, financeiro, estoque e manutenção conectados ao fluxo comercial", "Portal público de rastreio e automações que aproximam operação, equipe e cliente final", "Copiloto no WhatsApp e gateway MCP/OpenAPI para agentes de IA operarem sobre APIs do produto"],
     links: [],
+    tone: "blue",
   },
 ];

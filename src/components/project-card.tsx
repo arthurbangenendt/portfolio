@@ -1,58 +1,16 @@
+import { ArrowUpRight, Check, Clock3, Code2 } from "lucide-react";
+import Image from "next/image";
 import type { Project } from "@/lib/projects-data";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
-export function ProjectCard({ project }: { project: Project }) {
-  return (
-    <article className="border border-border rounded-xl p-6 md:p-8 flex flex-col gap-4">
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
-          {project.name}
-        </h3>
-        {project.role === "collaboration" && project.collaborators && (
-          <span className="text-sm text-muted-foreground border border-border rounded-full px-3 py-1">
-            Built with {project.collaborators.map((c) => c.name).join(", ")}
-          </span>
-        )}
-      </div>
+function ProjectPreview({ project }: { project: Project }) {
+  const isFrioHub = project.slug === "friohub";
+  const screenshot = isFrioHub
+    ? { src: "/projects/friohub-painel-profissional.png", alt: "Painel profissional do FrioHub em ambiente de testes", width: 3406, height: 1908, caption: "Tela real do produto · painel profissional em testes" }
+    : { src: "/projects/np-vendas-processos.png", alt: "Tela de processos e automações do Coolstack", width: 3398, height: 1898, caption: "Tela real do produto · processos e automações" };
 
-      <p className="text-muted-foreground">{project.tagline}</p>
-      <p>{project.description}</p>
+  return <figure className="project-preview"><div className="project-screenshot"><Image src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} sizes="(max-width: 720px) 100vw, 50vw" /></div><figcaption className="preview-caption">{screenshot.caption}</figcaption></figure>;
+}
 
-      {project.highlights && project.highlights.length > 0 && (
-        <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground list-disc list-inside">
-          {project.highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
-          ))}
-        </ul>
-      )}
-
-      <div className="flex flex-wrap gap-2 pt-2">
-        {project.stack.map((tech) => (
-          <span
-            key={tech}
-            className="text-xs font-medium border border-border rounded-full px-3 py-1 text-muted-foreground"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {project.links.length > 0 && (
-        <div className="flex flex-wrap gap-3 pt-2">
-          {project.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </article>
-  );
+export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return <article className="project-case" id={project.slug}><div className="case-topline"><span>0{index + 1}</span><span>{project.eyebrow}</span></div><div className="case-layout"><div className="case-content"><h3>{project.name}</h3><p className="case-description">{project.description}</p><div className="case-meta"><div><Clock3 size={16} /><span><b>Período</b>{project.period}</span></div><div><Code2 size={16} /><span><b>{project.role}</b>TypeScript end-to-end</span></div></div><ul className="case-outcomes">{project.outcomes.map((outcome) => <li key={outcome}><Check size={16} />{outcome}</li>)}</ul><div className="tech-list">{project.stack.map((tech) => <span key={tech}>{tech}</span>)}</div>{project.links.length > 0 && <div className="case-links">{project.links.map((link) => <a key={link.label} href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noopener noreferrer" : undefined}>{link.label}<ArrowUpRight size={16} /></a>)}</div>}</div><ProjectPreview project={project} /></div></article>;
 }

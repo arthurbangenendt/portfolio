@@ -4,12 +4,5 @@ import { ProjectsSection } from "@/components/projects-section";
 import { ContactSection } from "@/components/contact-section";
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <AboutSection />
-      <ProjectsSection />
-      <ContactSection />
-    </>
-  );
+  return <main><Hero /><AboutSection /><ProjectsSection /><ContactSection /></main>;
 }
